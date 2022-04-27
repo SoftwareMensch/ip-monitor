@@ -1,0 +1,13 @@
+#!/bin/sh
+
+IP_ADDR=$1
+if [ -z "${IP_ADDR}" ]
+then
+  echo "missing ip address"
+  exit 1
+fi
+
+echo "got ${IP_ADDR}"
+
+# EOF
+

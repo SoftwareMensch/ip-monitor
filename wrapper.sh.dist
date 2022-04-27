@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# sometimes network is still not up after boot, so we give it 10 seconds
+# the systemd service should handle this, but it's not working proberly
+sleep 10s
+
+NET_DEV=eth0
+CURRENT_IP=$(ip -6 address show ${NET_DEV} |grep 'scope global dynamic' |cut -d' ' -f6 |cut -d'/' -f1)
+TARGET_CMD=$(pwd)/target.sh
+EXE=$(pwd)/monitor
+
+# initial ip update
+${TARGET_CMD} ${CURRENT_IP}
+
+# watch for updates
+${EXE} ${NET_DEV} ${CURRENT_IP} ${TARGET_CMD}
+
+# EOF
+

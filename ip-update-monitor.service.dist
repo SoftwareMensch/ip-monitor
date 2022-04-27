@@ -1,0 +1,15 @@
+[Unit]
+Description=IP Update Monitor
+Requires=systemd-networkd.service
+After=systemd-networkd.service
+
+[Service]
+Restart=always
+User=YOUR-SERVER
+Group=YOUR-GROUIP
+WorkingDirectory=/your/path
+ExecStart=/your/path/wrapper.sh
+
+[Install]
+WantedBy=multi-user.target
+
