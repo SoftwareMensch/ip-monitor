@@ -37,6 +37,7 @@ func (s *ShellCommandExecutor) Execute(cmd string) error {
 	// wie cannot simply mock this for unit testing
 	cliCommand := exec.Command(args[0], args[1:]...)
 
+	defer func() { _ = cliCommand.Wait() }()
 	if err := cliCommand.Start(); err != nil {
 		return err
 	}

@@ -35,6 +35,7 @@ func (m *StdoutMonitor) Run() error {
 	cliCommand := exec.Command(args[0], args[1:]...)
 	stdout, _ := cliCommand.StdoutPipe()
 
+	defer func() { _ = cliCommand.Wait() }()
 	if err := cliCommand.Start(); err != nil {
 		return err
 	}
